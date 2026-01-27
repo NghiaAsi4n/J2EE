@@ -5,7 +5,6 @@ public class Main {
         List<Book> listBook = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         int chon;
-
         listBook.add(new Book(101, "Lập trình Java căn bản", "Nguyễn Văn A", 150000));
         listBook.add(new Book(102, "Cấu trúc dữ liệu và giải thuật", "Nguyễn Văn B", 200000));
         listBook.add(new Book(103, "Nhập môn J2EE và Spring Boot", "Nguyễn Văn C", 250000));
@@ -29,8 +28,6 @@ public class Main {
         do {
             System.out.print(menu);
             chon = sc.nextInt();
-
-            // Sử dụng Switch Expression (Java mới)
             switch (chon) {
                 case 1 -> {
                     Book b = new Book();
@@ -44,7 +41,20 @@ public class Main {
                     System.out.println("Đã xóa sách thành công");
                 }
                 case 3 -> {
-                    System.out.print("Nhập vào mã sách cần điều chỉnh:");
+                    System.out.print("Nhập vào mã sách cần điều chỉnh: ");
+                    int bookid = sc.nextInt();
+                    listBook.stream()
+                            .filter(b -> b.getId() == bookid)
+                            .findFirst()
+                            .ifPresentOrElse(
+                                    book -> {
+                                        System.out.println("Đã tìm thấy sách: " + book.getTitle());
+                                        System.out.println("Nhập thông tin mới: ");
+                                        book.input();
+                                        System.out.println("Cập nhật thành công!");
+                                    },
+                                    () -> System.out.println("Không tìm thấy sách có mã: " + bookid)
+                            );
                 }
                 case 4 -> {
                     System.out.print("\nXuất thông tin danh sách ");
