@@ -1,0 +1,15 @@
+<div layout:decorate="~{layout}" layout:fragment="content">
+    <h2 class="mb-4">Thêm Sách Mới</h2>
+    <form th:action="@{/books/add}" th:object="${book}" method="post" class="form-control mt-4">
+        <div class="mb-3">
+            <label for="title" class="form-label">Tiêu đề:</label>
+            <input type="text" id="title" th:field="*{title}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Tác giả:</label>
+            <input type="text" id="author" th:field="*{author}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Thêm Sách</button>
+        <a th:href="@{/books}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
